@@ -37,11 +37,7 @@ function Doctors() {
             >
               <div className="w-full h-56 overflow-hidden">
                 <img
-                  src={
-                    item.image.startsWith("data:image")
-                      ? item.image
-                      : `https://doctor-appointment-backend-cyan.vercel.app/${item.image}`
-                  }
+                  src={item.image}
                   alt={item.name}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
