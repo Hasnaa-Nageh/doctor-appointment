@@ -14,10 +14,11 @@ function Doctors() {
         "https://doctor-appointment-backend-cyan.vercel.app/api/doctor/get-all-doctors"
       );
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Failed to fetch doctors");
-      // setDoctors(data.doctors.slice(0, 3));
+      console.log(data.doctors);
+      setDoctors(data.doctors.slice(0, 3));
 
-      setDoctors(data.doctors.filter((doc) => doc.image).slice(0, 3));
+      // setDoctors(data.doctors.slice(0, 3));
+      // setDoctors(data.doctors.filter((doc) => doc.image).slice(0, 3));
     } catch (err) {
       console.log(err);
     }
@@ -30,7 +31,6 @@ function Doctors() {
           Our Professional Doctors
         </h2>
 
-        {/* Doctors Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {doctors.map((item) => (
             <div
@@ -43,7 +43,6 @@ function Doctors() {
                   alt={item.name}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
-                {console.log(item.image)}
               </div>
 
               <div className="p-5">
