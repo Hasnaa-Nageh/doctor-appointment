@@ -15,7 +15,9 @@ function Doctors() {
       );
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Failed to fetch doctors");
-      setDoctors(data.doctors.slice(0, 3));
+      // setDoctors(data.doctors.slice(0, 3));
+
+      setDoctors(data.doctors.filter((doc) => doc.image).slice(0, 3));
     } catch (err) {
       console.log(err);
     }
@@ -41,6 +43,7 @@ function Doctors() {
                   alt={item.name}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
+                {console.log(item.image)}
               </div>
 
               <div className="p-5">
