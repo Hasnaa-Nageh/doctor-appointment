@@ -39,48 +39,61 @@ function Departments() {
   };
 
   return (
-    <section className="py-12 bg-white max-w-6xl mx-auto">
-      <div className="mb-8 text-center">
-        <h2 className="text-3xl font-bold mb-2">Departments</h2>
-        <p className="text-gray-600 max-w-xl mx-auto">
+    <section className="py-12 bg-white max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Header */}
+      <div className="mb-10 text-center">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-3 text-gray-800">
+          Departments
+        </h2>
+        <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
           Explore our medical departments and find the right care for your
           health. Click on any department to see detailed information and
           services offered.
         </p>
       </div>
 
-      {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>}
+      {/* Loading & Error */}
+      {loading && <p className="text-center text-gray-600">Loading...</p>}
+      {error && <p className="text-center text-red-500">{error}</p>}
 
-      <div className="flex flex-col md:flex-row gap-6">
-        <ul className="flex md:flex-col space-x-4 md:space-x-0 border-b md:border-b-0 md:border-r border-gray-300">
-          {dept.map((item) => (
-            <li key={item._id}>
-              <button
-                onClick={() => handelTabClick(item._id)}
-                className={`block mt-3 w-40 mr-4 px-4 py-2 rounded-t md:rounded-tr-none md:rounded-l ${
-                  activeTab === item._id
-                    ? "bg-[#045f89] text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                {item.name}
-              </button>
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex-1 bg-gray-50 rounded shadow p-4">
-          {dept
-            .filter((item) => item._id === activeTab)
-            .map((item) => (
-              <div key={item._id} className="flex flex-col gap-4">
-                <h3 className="text-2xl font-semibold">{item.name}</h3>
-                <p className="text-gray-700">{item.description}</p>
-              </div>
+      {/* Content */}
+      {!loading && !error && (
+        <div className="flex flex-col md:flex-row gap-6">
+          {/* Tabs */}
+          <ul className="flex overflow-x-auto md:overflow-visible md:flex-col md:w-1/3 border-b md:border-b-0 md:border-r border-gray-300 pb-2 md:pb-0">
+            {dept.map((item) => (
+              <li key={item._id} className="flex-shrink-0">
+                <button
+                  onClick={() => handelTabClick(item._id)}
+                  className={`block w-full text-left md:w-48 lg:w-56 px-4 py-2 my-2 rounded-md transition-colors duration-300 ${
+                    activeTab === item._id
+                      ? "bg-[#045f89] text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  {item.name}
+                </button>
+              </li>
             ))}
+          </ul>
+
+          {/* Details */}
+          <div className="flex-1 bg-gray-50 rounded-xl shadow-md p-6">
+            {dept
+              .filter((item) => item._id === activeTab)
+              .map((item) => (
+                <div key={item._id} className="flex flex-col gap-4">
+                  <h3 className="text-2xl font-semibold text-gray-800">
+                    {item.name}
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }
